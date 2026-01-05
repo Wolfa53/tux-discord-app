@@ -41,14 +41,15 @@ class MyClient(discord.Client):
                         msg = f"Age: {user_page['profiles']['en']['age']}\nBirthday: {cEvent['month']}/{cEvent['day']}"
                         break
             elif info == "flags":
-                    msg = "Flags:"
-                    for flag in user_page['profiles']['en']['flags']:
-                        msg = f"{msg}\n{flag}"
-                    if len(user_page['profiles']['en']['customFlags']):
-                        msg = (f"{msg}\n\nCustom Flags:")
-                        for j in range(len(user_page['profiles']['en']['customFlags'])):
-                            cflag = user_page['profiles']['en']['customFlags'][j]['name']
-                            msg = f"{msg}\n{cflag}"
+                msg = "Flags:"
+                for flag in user_page['profiles']['en']['flags']:
+                    msg = f"{msg}\n{flag}"
+                if len(user_page['profiles']['en']['customFlags']):
+                    msg = (f"{msg}\n\nCustom Flags:")
+                    for j in range(len(user_page['profiles']['en']['customFlags'])):
+                        cflag = user_page['profiles']['en']['customFlags'][j]['name']
+                        flag_msg = f"{msg}\n{cflag}"
+                msg = flag_msg
 
             elif info in ("description links"):
                 msg = user_page['profiles']['en'][info]
@@ -84,6 +85,7 @@ class MyClient(discord.Client):
                         msg = f"{msg}\n**Age**: {user_page['profiles']['en']['age']}\n**Birthday**: {cEvent['month']}/{cEvent['day']}"
                         break
                 msg = f"{msg}\n**Timezone**: {user_page['profiles']['en']['timezone']['tz']}"
+                msg = f"{msg}\n{flag_msg}"
             else:
                 msg = "Invalid info option (or i haven't set it up yet be patient mf grr)\nUse `;page help` or ask Aki for help."
             
