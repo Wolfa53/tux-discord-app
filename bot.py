@@ -2,15 +2,6 @@ import discord, requests, json
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-#utc_time = datetime.now(ZoneInfo("UTC"))
-#print("UTC Time:", utc_time)
-
-#new_york_time = utc_time.astimezone(ZoneInfo("America/New_York"))
-#print("New York Time:", new_york_time)
-
-#sydney_time = utc_time.astimezone(ZoneInfo("Australia/Sydney"))
-#print("Sydney Time:", sydney_time)
-
 
 msg = "Error: UnboundLocalError: `msg` not found."
 with open('bot_token.txt', 'r') as file:
@@ -25,7 +16,6 @@ class MyClient(discord.Client):
     async def on_ready(self):
         print(f'Logged in as {self.user} (ID: {self.user.id})')
         print('--------')
-        print(requests.get("https://en.pronouns.page/").status_code)
 
     async def on_message(self, message):
         if message.content.startswith(';page'):
@@ -98,7 +88,13 @@ class MyClient(discord.Client):
 
         elif ';cal' == message.content:
             msg = today_cal.text.split(',')[3].split('":')[1].replace('"[English]', 'Today is').replace('"', '')
-        
+
+        elif message.content.startswith(';tz'):
+            args = message.content.split()
+            des_tz = args[1]
+            msg = datetime.now(tz=ZoneInfo(des_tz)).strftime("%Z:\n\n%H:%M:%S\n%a, %d/%m/%y")
+
+   
         elif message.content.startswith(";definitions"):
             #MAKE DICT!
             pass
@@ -130,7 +126,7 @@ class MyClient(discord.Client):
 #            return
         
         elif ';help' == message.content:
-            msg = "Here is a list of all commands for the Tux bot:\n`;help` - brings up this help menu\n`;about` - displays basic information about the bot\n`;hello` - says hello back\n`;test` - responds 'working'\n`;ping` - responds 'pong'\n`;ying` - responds 'yang'\n`;linux` - responds 'is peak'\n`;cal` - shows today's queer calendar entries from pronouns.page\n`;page help` - displays the help menu for all pronouns.page card commands\n"
+            msg = "Here is a list of all commands for the Tux bot:\n`;help` - brings up this help menu\n`;about` - displays basic information about the bot\n`;hello` - says hello back\n`;test` - responds 'working'\n`;ping` - responds 'pong'\n`;ying` - responds 'yang'\n`;linux` - responds 'is peak'\n`;tz {timezone}` - shows the current time in the given timezone\n`;cal` - shows today's queer calendar entries from pronouns.page\n`;page help` - displays the help menu for all pronouns.page card commands\n"
 
         elif ';about' == message.content:
             msg = "This is the Tux bot, created and developed by Aki. Information about Aki can be found [here](https://aki53.carrd.co)\nContact xem through either the Tux or Wolfa Den discord servers. found on the carrd. You can also join the Tux Bot discord server [here](https://discord.gg/xRdT8ZeAqc)"
