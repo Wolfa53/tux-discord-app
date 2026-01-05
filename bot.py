@@ -58,7 +58,6 @@ class MyClient(discord.Client):
 
             elif info == "words":
                 for i, cat in enumerate(user_page['profiles']['en'][info]):
-                    print(cat)
                     msg = f"{msg}\n**{cat['header']}**"
                     for entry in user_page['profiles']['en'][info][i]['values']:
                         msg = f"{msg}\n{entry['value']} - {entry['opinion']}"
