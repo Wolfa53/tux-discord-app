@@ -18,6 +18,7 @@ class MyClient(discord.Client):
         print('--------')
 
     async def on_message(self, message):
+        msg = ''
         if message.content.startswith(';page'):
             args = message.content.casefold().split()
             try:
@@ -56,7 +57,11 @@ class MyClient(discord.Client):
                 msg = user_page['profiles']['en'][info]['tz']
 
             elif info == "words":
-                msg = "dude this one is gonna take AGES to code i haven't done it yet but i have no life so prob won't be long :3"
+                for i, cat in enumerate(user_page['profiles']['en'][info]):
+                    print(cat)
+                    msg = f"{msg}\n**{cat['header']}**"
+                    for entry in user_page['profiles']['en'][info][i]['values']:
+                        msg = f"{msg}\n{entry['value']} - {entry['opinion']}"
 
             elif info == "help":
                 msg = "The page command is used to find information from a user's pronoun page.\nUsage: `;page *info* *user*`\n 'info' is the information you want to receive, 'user' is the username of the pronoun page account. Contact Aki (run `;about`) for further assistance if needed."
@@ -139,10 +144,6 @@ class MyClient(discord.Client):
         except UnboundLocalError as e:
             msg = f"UnboundLocalError: {e}"
         await message.channel.send(msg)
-
-    async def on_message_delete(self, message):
-        if message.author != self.user:
-            await message.channel.send(f'{message.author} has deleted the message: {message.content}')
 
     async def on_member_join(self, member):
         guild = member.guild
