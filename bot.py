@@ -87,11 +87,11 @@ class MyClient(discord.Client):
                 msg = f"{msg}\n**Flags**:"
                 for flag in user_page['profiles']['en']['flags']:
                     msg = f"{msg}\n{flag}"
-                    if len(user_page['profiles']['en']['customFlags']):
-                        msg = (f"{msg}\n\nCustom Flags:")
-                        for j in range(len(user_page['profiles']['en']['customFlags'])):
-                            cflag = user_page['profiles']['en']['customFlags'][j]['name']
-                            msg = f"{msg}\n{cflag}"
+                if len(user_page['profiles']['en']['customFlags']):
+                    msg = (f"{msg}\n\nCustom Flags:")
+                    for j in range(len(user_page['profiles']['en']['customFlags'])):
+                        cflag = user_page['profiles']['en']['customFlags'][j]['name']
+                        msg = f"{msg}\n{cflag}"
             else:
                 msg = "Invalid info option (or i haven't set it up yet be patient mf grr)\nUse `;page help` or ask Aki for help."
             
