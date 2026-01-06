@@ -107,7 +107,7 @@ class MyClient(discord.Client):
             msg = datetime.now(tz=ZoneInfo(des_tz)).strftime("%Z:\n\n%H:%M:%S\n%a, %d/%m/%y")
 
    
-        elif message.content.startswith(";definitions"):
+        elif message.content.startswith(";def"):
             #MAKE DICT!
             pass
             
@@ -122,6 +122,9 @@ class MyClient(discord.Client):
 
         elif message.content == ';test':
             msg = 'working'
+
+        elif message.content == ";cow":
+            msg = "https://tenor.com/view/weird-gif-9742017"
 
         elif ';hello' == message.content:
             msg = f'Hello, {message.author.mention} !!'
@@ -138,7 +141,7 @@ class MyClient(discord.Client):
 #            return
         
         elif ';help' == message.content:
-            msg = "Here is a list of all commands for the Tux bot:\n`;help` - brings up this help menu\n`;about` - displays basic information about the bot\n`;hello` - says hello back\n`;test` - responds 'working'\n`;ping` - responds 'pong'\n`;ying` - responds 'yang'\n`;linux` - responds 'is peak'\n`;tz {timezone}` - shows the current time in the given timezone\n`;cal` - shows today's queer calendar entries from pronouns.page\n`;page help` - displays the help menu for all pronouns.page card commands\n"
+            msg = "Here is a list of all commands for the Tux bot:\n`;help` - brings up this help menu\n`;about` - displays basic information about the bot\n`;cow` - displays a gif of a cow\n`;hello` - says hello back\n`;test` - responds 'working'\n`;ping` - responds 'pong'\n`;ying` - responds 'yang'\n`;linux` - responds 'is peak'\n`;tz {timezone_id}` - shows the current time in the given timezone\n`;cal` - shows today's queer calendar entries from pronouns.page\n`;page help` - displays the help menu for all pronouns.page card commands\n"
 
         elif ';about' == message.content:
             msg = "This is the Tux bot, created and developed by Aki. Information about Aki can be found [here](https://aki53.carrd.co)\nContact xem through either the Tux or Wolfa Den discord servers. found on the carrd. You can also join the Tux Bot discord server [here](https://discord.gg/xRdT8ZeAqc)"
