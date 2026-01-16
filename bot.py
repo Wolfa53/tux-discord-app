@@ -53,7 +53,7 @@ class MyClient(discord.Client):
             elif info in ("description links"):
                 msg = user_page['profiles']['en'][info]
 
-            elif info == "timezone":
+            elif info == "timezone" or "tz":
                 msg = user_page['profiles']['en'][info]['tz']
 
             elif info == "words":
