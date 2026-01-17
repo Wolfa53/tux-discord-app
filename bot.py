@@ -111,7 +111,7 @@ class MyClient(discord.Client):
             #MAKE DICT!
             pass
             
-        elif message.content.startswith(';linux'):
+        elif message.content == (';linux'):
             msg = 'is peak'
 
         elif message.content == ";ying":
