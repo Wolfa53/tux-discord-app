@@ -144,7 +144,7 @@ class MyClient(discord.Client):
             msg = "Here is a list of all commands for the Tux bot:\n`;help` - brings up this help menu\n`;about` - displays basic information about the bot\n`;cow` - displays a gif of a cow\n`;hello` - says hello back\n`;test` - responds 'working'\n`;ping` - responds 'pong'\n`;ying` - responds 'yang'\n`;linux` - responds 'is peak'\n`;tz {timezone_id}` - shows the current time in the given timezone\n`;cal` - shows today's queer calendar entries from pronouns.page\n`;page help` - displays the help menu for all pronouns.page card commands\n"
 
         elif ';about' == message.content:
-            msg = "This is the Tux bot, created and developed by Aki. Information about Aki can be found [here](https://aki53.carrd.co)\nContact xem through the server found on the carrd, or through the [Tux Bot discord server](https://discord.gg/xRdT8ZeAqc)"
+            msg = "This is the Tux bot, created and developed by Aki. Information about Aki can be found [here](https://aki53.carrd.co)\nContact them through the server found on the carrd, or through the [Tux Bot discord server](https://discord.gg/xRdT8ZeAqc)"
 
         else:
             return
