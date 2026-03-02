@@ -10,7 +10,6 @@ with open('bot_token.txt', 'r') as file:
 today_cal = requests.get("https://en.pronouns.page/api/calendar/today")
 def page(username):
     return json.loads(requests.get(f"https://en.pronouns.page/api/profile/get/{username}?version=2").text)
-miya_page = page('catlover7299')
 class MyClient(discord.Client):
     user: discord.ClientUser
     async def on_ready(self):
