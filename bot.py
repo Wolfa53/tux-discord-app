@@ -52,8 +52,8 @@ class MyClient(discord.Client):
             elif info in ("description links"):
                 msg = user_page['profiles']['en'][info]
 
-            elif info == "timezone" or "tz":
-                msg = user_page['profiles']['en'][info]['tz']
+            elif info == "timezone" or info == "tz":
+                msg = user_page['profiles']['en']['timezone']['tz']
 
             elif info == "words":
                 for i, cat in enumerate(user_page['profiles']['en'][info]):
