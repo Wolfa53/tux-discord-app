@@ -1,8 +1,6 @@
 import discord, requests, json
-import fontawesome as fa
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from icon_font_to_png import *
 
 msg = "Error: UnboundLocalError: `msg` not found."
 with open('bot_token.txt', 'r') as file:
@@ -42,7 +40,18 @@ class MyClient(discord.Client):
                     except NameError:
                         msg = f"{opinion}(icon goes here?)"
                     for j, oattr in enumerate(user_page['profiles']['en']['opinions'][opinion]):
-                        msg = f"{msg}\n-# {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
+                        msg = f"{msg}\n {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
+                        if j == 3:
+                            if user_page['profiles']['en']['opinions'][opinion][oattr] == "bold":
+                                msg = f"{msg}\n {oattr}: **bold**"
+                            elif user_page['profiles']['en']['opinions'][opinion][oattr] == "italics":
+                                msg = f"{msg}\n {oattr}: *italics*"
+                            elif user_page['profiles']['en']['opinions'][opinion][oattr] == "small":
+                                msg = f"{msg}\n-# {oattr}: small"
+                            elif user_page['profiles']['en']['opinions'][opinion][oattr] == "bold-italics":
+                                msg = f"{msg}\n {oattr}: *\**bold & italics*\**"
+                            elif user_page['profiles']['en']['opinions'][opinion][oattr] == "spoiler":
+                                msg = f"{msg}\n {oattr}: ||spoiler||"
 
             elif info in ("pronouns names"):
                 for i, item in enumerate(user_page['profiles']['en'][info]):
@@ -77,7 +86,7 @@ class MyClient(discord.Client):
                         if word['opinion'] == "meh":
                             opinion = ":thumbsup: (meh)"
                         elif word['opinion'] == "yes":
-                            opinion = ":heart: (yes)"
+                            opinion = "**:heart: (yes)**"
                         elif word['opinion'] == "jokingly":
                             opinion = ":stuck_out_tongue: (jokingly)"
                         elif word['opinion'] == "no":
@@ -97,6 +106,17 @@ class MyClient(discord.Client):
                     msg = f"{msg}\n\n{opinion}(icon goes here?)"
                     for j, oattr in enumerate(user_page['profiles']['en']['opinions'][opinion]):
                         msg = f"{msg}\n-# {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
+                        if j == 3:
+                            if user_page['profiles']['en']['opinions'][opinion][oattr] == "bold":
+                                msg = f"{msg}\n {oattr}: **bold**"
+                            elif user_page['profiles']['en']['opinions'][opinion][oattr] == "italics":
+                                msg = f"{msg}\n {oattr}: *italics*"
+                            elif user_page['profiles']['en']['opinions'][opinion][oattr] == "small":
+                                msg = f"{msg}\n-# {oattr}: small"
+                            elif user_page['profiles']['en']['opinions'][opinion][oattr] == "bold-italics":
+                                msg = f"{msg}\n {oattr}: *\**bold & italics*\**"
+                            elif user_page['profiles']['en']['opinions'][opinion][oattr] == "spoiler":
+                                msg = f"{msg}\n {oattr}: ||spoiler||"
                 msg = f"{msg}\n\n**Names**: "
                 for i, item in enumerate(user_page['profiles']['en']['names']):
                     item = f"{item['value']} - {item['opinion']}"
