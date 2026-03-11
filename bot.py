@@ -154,13 +154,13 @@ class MyClient(discord.Client):
             msg = 'working'
 
         elif message.content == ";cow":
-            msg = "https://tenor.com/view/weird-gif-9742017"
+            msg = "https://tenor.com/view/weird-gif-9742017\npeak."
 
         elif ';hello' == message.content:
             msg = f'Hello, {message.author.mention} !!'
 
 #        elif message.content.startswith(';event'):
-#            events = requests.get("https://discord.com/api/guilds/1197138834488561715/scheduled-events")
+#            events = requests.get("guild_id")
 #            msg = events.text
 #            print(events.text)
 #            event = None
@@ -194,65 +194,6 @@ class MyClient(discord.Client):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        self.role_message_id = 1456864305353068556
-        self.emoji_to_role = {
-            discord.PartialEmoji(name='💙'): 1421100812192579626,
-            discord.PartialEmoji(name='🩷'): 1421100852416086137,
-            discord.PartialEmoji(name='💜'): 1421100874175873034,
-            discord.PartialEmoji(name='🩶'): 1456864583561117758,
-            discord.PartialEmoji(name='🤍'): 1421100947219681290,
-            discord.PartialEmoji(name='💛'): 1421100909118881792
-        }
-
-    async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
-        if payload.message_id != self.role_message_id:
-            return
-
-        guild = self.get_guild(payload.guild_id)
-        if guild is None:
-            return
-
-        try:
-            role_id = self.emoji_to_role[payload.emoji]
-        except KeyError:
-            return
-
-        role = guild.get_role(role_id)
-        if role is None:
-            return
-        assert payload.member is not None
-
-        try:
-            await payload.member.add_roles(role)
-        except discord.HTTPException:
-            pass
-
-    async def on_raw_reaction_remove(self, payload: discord.RawReactionActionEvent):
-        if payload.message_id != self.role_message_id:
-            return
-
-        guild = self.get_guild(payload.guild_id)
-        if guild is None:
-            return
-
-        try:
-            role_id = self.emoji_to_role[payload.emoji]
-        except KeyError:
-            return
-
-        role = guild.get_role(role_id)
-        if role is None:
-            return
-
-        member = guild.get_member(payload.user_id)
-        if member is None:
-            return
-
-        try:
-            await member.remove_roles(role)
-        except discord.HTTPException:
-            pass
 
 intents = discord.Intents.default()
 intents.message_content = True
