@@ -34,12 +34,8 @@ class MyClient(discord.Client):
             avatar = user_page['avatar']
             if info == "avatar" or info == "pfp":
                 msg = avatar
+
             elif info == "opinions":
-#                msg = fa.icons['thumbs-up']
-#                icons = IconFont(r"C:\Users\aiden\Downloads\fontawesome-free-5.15.4-web\css\regular.css", r"C:\Users\aiden\Downloads\fontawesome-free-5.15.4-web\webfonts\fa-regular-400.ttf")
-#                msg = "\uF164"
-#                print(msg)
-#                print(icons.load_css()[0])
                 for i, opinion in enumerate(list(user_page['profiles']['en']['opinions'].keys())):
                     try:
                         msg = f"{msg}\n\n{opinion}(icon goes here?)"
@@ -48,16 +44,16 @@ class MyClient(discord.Client):
                     for j, oattr in enumerate(user_page['profiles']['en']['opinions'][opinion]):
                         msg = f"{msg}\n-# {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
 
- #               icons.export_icon(fa.icons[icon], 50)
-
             elif info in ("pronouns names"):
                 for i, item in enumerate(user_page['profiles']['en'][info]):
                     msg = f"{msg}\n{item['value']} - {item['opinion']}"
+
             elif info == "age":
                 for cEvent in user_page['profiles']['en']['customEvents']:
                     if "birthday" in cEvent['name'].casefold():
                         msg = f"Age: {user_page['profiles']['en']['age']}\nBirthday: {cEvent['month']}-{cEvent['day']}"
                         break
+                    
             elif info == "flags":
                 msg = "Flags:"
                 for flag in user_page['profiles']['en']['flags']:
