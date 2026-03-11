@@ -40,7 +40,6 @@ class MyClient(discord.Client):
                     except NameError:
                         msg = f"{opinion}(icon goes here?)"
                     for j, oattr in enumerate(user_page['profiles']['en']['opinions'][opinion]):
-                        msg = f"{msg}\n {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
                         if j == 3:
                             if user_page['profiles']['en']['opinions'][opinion][oattr] == "bold":
                                 msg = f"{msg}\n {oattr}: **bold**"
@@ -52,6 +51,8 @@ class MyClient(discord.Client):
                                 msg = f"{msg}\n {oattr}: *\**bold & italics*\**"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "spoiler":
                                 msg = f"{msg}\n {oattr}: ||spoiler||"
+                        else:
+                            msg = f"{msg}\n {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
 
             elif info in ("pronouns names"):
                 for i, item in enumerate(user_page['profiles']['en'][info]):
@@ -105,7 +106,6 @@ class MyClient(discord.Client):
                 for i, opinion in enumerate(list(user_page['profiles']['en']['opinions'].keys())):
                     msg = f"{msg}\n\n{opinion}(icon goes here?)"
                     for j, oattr in enumerate(user_page['profiles']['en']['opinions'][opinion]):
-                        msg = f"{msg}\n-# {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
                         if j == 3:
                             if user_page['profiles']['en']['opinions'][opinion][oattr] == "bold":
                                 msg = f"{msg}\n {oattr}: **bold**"
@@ -117,6 +117,8 @@ class MyClient(discord.Client):
                                 msg = f"{msg}\n {oattr}: *\**bold & italics*\**"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "spoiler":
                                 msg = f"{msg}\n {oattr}: ||spoiler||"
+                        else:
+                            msg = f"{msg}\n-# {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
                 msg = f"{msg}\n\n**Names**: "
                 for i, item in enumerate(user_page['profiles']['en']['names']):
                     item = f"{item['value']} - {item['opinion']}"
