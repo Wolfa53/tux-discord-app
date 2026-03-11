@@ -1,7 +1,8 @@
 import discord, requests, json
+import fontawesome as fa
 from datetime import datetime
 from zoneinfo import ZoneInfo
-
+from icon_font_to_png import *
 
 msg = "Error: UnboundLocalError: `msg` not found."
 with open('bot_token.txt', 'r') as file:
@@ -22,18 +23,36 @@ class MyClient(discord.Client):
             args = message.content.casefold().split()
             try:
                 info = args[1]
-                user = args[2]
             except IndexError or ValueError:
                 info = 'help'
+            try:
+                user = args[2]
+            except IndexError or ValueError:
                 user = 'wolfa53_'
+
             user_page = page(user)
-            if info in ("pronouns names"):
+            avatar = user_page['avatar']
+            if info == "avatar" or info == "pfp":
+                msg = avatar
+            elif info == "opinions":
+#                msg = fa.icons['thumbs-up']
+#                icons = IconFont(r"C:\Users\aiden\Downloads\fontawesome-free-5.15.4-web\css\regular.css", r"C:\Users\aiden\Downloads\fontawesome-free-5.15.4-web\webfonts\fa-regular-400.ttf")
+#                msg = "\uF164"
+#                print(msg)
+#                print(icons.load_css()[0])
+                for i, opinion in enumerate(list(user_page['profiles']['en']['opinions'].keys())):
+                    try:
+                        msg = f"{msg}\n\n{opinion}(icon goes here?)"
+                    except NameError:
+                        msg = f"{opinion}(icon goes here?)"
+                    for j, oattr in enumerate(user_page['profiles']['en']['opinions'][opinion]):
+                        msg = f"{msg}\n-# {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
+
+ #               icons.export_icon(fa.icons[icon], 50)
+
+            elif info in ("pronouns names"):
                 for i, item in enumerate(user_page['profiles']['en'][info]):
-                    item = item['value']
-                    if i == 0:
-                        msg = item
-                    else:
-                        msg = f"{msg}\n{item} - {item['opinions']}"
+                    msg = f"{msg}\n{item['value']} - {item['opinion']}"
             elif info == "age":
                 for cEvent in user_page['profiles']['en']['customEvents']:
                     if "birthday" in cEvent['name'].casefold():
@@ -58,24 +77,40 @@ class MyClient(discord.Client):
             elif info == "words":
                 for i, cat in enumerate(user_page['profiles']['en'][info]):
                     msg = f"{msg}\n**{cat['header']}**"
-                    for entry in user_page['profiles']['en'][info][i]['values']:
-                        msg = f"{msg}\n{entry['value']} - {entry['opinion']}"
+                    for word in user_page['profiles']['en'][info][i]['values']:
+                        if word['opinion'] == "meh":
+                            opinion = ":thumbsup: (meh)"
+                        elif word['opinion'] == "yes":
+                            opinion = ":heart: (yes)"
+                        elif word['opinion'] == "jokingly":
+                            opinion = ":stuck_out_tongue: (jokingly)"
+                        elif word['opinion'] == "no":
+                            opinion = ":thumbsdown: (no)"
+                        elif word['opinion'] == "close":
+                            opinion = ":busts_in_silhouette: (close only)"
+                        else:
+                            opinion = word['opinion']
+                        msg = f"{msg}\n{word['value']} - {opinion}"
 
             elif info == "help":
-                msg = "The page command is used to find information from a user's pronoun page.\nUsage: `;page *info* *user*`\n 'info' is the information you want to receive, 'user' is the username of the pronoun page account. Contact Aki (run `;about`) for further assistance if needed."
+                msg = "The page command is used to find information from a user's pronoun page.\nUsage: `;page *info* *user*`\n 'info' is the information you want to receive, 'user' is the username of the pronoun page account. Contact Aki (run `;about` for contact info) for further assistance if needed."
 
             elif info == "all":
 #                try:
-                msg = "**Names**: "
+                for i, opinion in enumerate(list(user_page['profiles']['en']['opinions'].keys())):
+                    msg = f"{msg}\n\n{opinion}(icon goes here?)"
+                    for j, oattr in enumerate(user_page['profiles']['en']['opinions'][opinion]):
+                        msg = f"{msg}\n-# {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
+                msg = f"{msg}\n\n**Names**: "
                 for i, item in enumerate(user_page['profiles']['en']['names']):
                     item = f"{item['value']} - {item['opinion']}"
                     msg = f"{msg}\n{item}"
 #                except:
 #                    pass
-
                 msg = f"{msg}\n\n**Pronouns**: "
                 for i, item in enumerate(user_page['profiles']['en']['pronouns']):
                     msg = f"{msg}\n{item['value']} - {item['opinion']}"
+
                 msg = f"{msg}\n\n**Description**: {user_page['profiles']['en']['description']}"
                 msg = f"{msg}\n**Links**: {user_page['profiles']['en']['links']}"
                 for cEvent in user_page['profiles']['en']['customEvents']:
