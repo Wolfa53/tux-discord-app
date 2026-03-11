@@ -48,7 +48,7 @@ class MyClient(discord.Client):
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "small":
                                 msg = f"{msg}\n-# {oattr}: small"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "bold-italics":
-                                msg = f"{msg}\n {oattr}: *\**bold & italics*\**"
+                                msg = f"{msg}\n {oattr}: \\***bold & italics\\***"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "spoiler":
                                 msg = f"{msg}\n {oattr}: ||spoiler||"
                         else:
@@ -114,11 +114,11 @@ class MyClient(discord.Client):
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "small":
                                 msg = f"{msg}\n-# {oattr}: small"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "bold-italics":
-                                msg = f"{msg}\n {oattr}: ***bold & italics***"
+                                msg = f"{msg}\n {oattr}: \\***bold & italics\\***"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "spoiler":
                                 msg = f"{msg}\n {oattr}: ||spoiler||"
                         else:
-                            msg = f"{msg}\n-# {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
+                            msg = f"{msg}\n {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
                 msg = f"{msg}\n\n**Names**: "
                 for i, item in enumerate(user_page['profiles']['en']['names']):
                     item = f"{item['value']} - {item['opinion']}"
