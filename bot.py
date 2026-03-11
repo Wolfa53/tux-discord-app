@@ -42,15 +42,15 @@ class MyClient(discord.Client):
                     for j, oattr in enumerate(user_page['profiles']['en']['opinions'][opinion]):
                         if j == 3:
                             if user_page['profiles']['en']['opinions'][opinion][oattr] == "bold":
-                                msg = fr"{msg}\n {oattr}: **bold**"
+                                msg = f"{msg}\n {oattr}: **bold**"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "italics":
-                                msg = fr"{msg}\n {oattr}: *italics*"
+                                msg = f"{msg}\n {oattr}: *italics*"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "small":
-                                msg = fr"{msg}\n-# {oattr}: small"
+                                msg = f"{msg}\n-# {oattr}: small"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "bold-italics":
-                                msg = fr"{msg}\n {oattr}: *\**bold & italics*\**"
+                                msg = f"{msg}\n {oattr}: *\**bold & italics*\**"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "spoiler":
-                                msg = fr"{msg}\n {oattr}: ||spoiler||"
+                                msg = f"{msg}\n {oattr}: ||spoiler||"
                         else:
                             msg = f"{msg}\n {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
 
@@ -108,15 +108,15 @@ class MyClient(discord.Client):
                     for j, oattr in enumerate(user_page['profiles']['en']['opinions'][opinion]):
                         if j == 3:
                             if user_page['profiles']['en']['opinions'][opinion][oattr] == "bold":
-                                msg = fr"{msg}\n {oattr}: **bold**"
+                                msg = f"{msg}\n {oattr}: **bold**"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "italics":
-                                msg = fr"{msg}\n {oattr}: *italics*"
+                                msg = f"{msg}\n {oattr}: *italics*"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "small":
-                                msg = fr"{msg}\n-# {oattr}: small"
+                                msg = f"{msg}\n-# {oattr}: small"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "bold-italics":
-                                msg = fr"{msg}\n {oattr}: *\**bold & italics*\**"
+                                msg = f"{msg}\n {oattr}: ***bold & italics***"
                             elif user_page['profiles']['en']['opinions'][opinion][oattr] == "spoiler":
-                                msg = fr"{msg}\n {oattr}: ||spoiler||"
+                                msg = f"{msg}\n {oattr}: ||spoiler||"
                         else:
                             msg = f"{msg}\n-# {oattr}: {user_page['profiles']['en']['opinions'][opinion][oattr]}"
                 msg = f"{msg}\n\n**Names**: "
