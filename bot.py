@@ -174,7 +174,10 @@ class MyClient(discord.Client):
             msg = 'working'
 
         elif message.content == ";cow":
-            msg = "https://tenor.com/view/weird-gif-9742017\npeak."
+            msg = "https://tenor.com/view/weird-gif-9742017"
+        
+        elif message.content == ";green":
+            msg = "https://tenor.com/view/ah-so-sorry-ah-so-green-cat-tweeks-sheep-green-gif-8408810868795605401"
 
         elif ';hello' == message.content:
             msg = f'Hello, {message.author.mention} !!'
